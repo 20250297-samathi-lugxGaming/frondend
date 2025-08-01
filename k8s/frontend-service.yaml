@@ -1,16 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    kompose.cmd: C:\Users\User\AppData\Local\Microsoft\WinGet\Packages\Kubernetes.kompose_Microsoft.Winget.Source_8wekyb3d8bbwe\kompose.exe convert -f docker-compose.yaml
-    kompose.version: 1.36.0 (ae2a39403)
+  name: lugx-frontend
   labels:
-    io.kompose.service: frontend
-  name: frontend
+    app: lugx-frontend
 spec:
+  type: ClusterIP
+  selector:
+    app: lugx-frontend
   ports:
-    - name: "8080"
+    - name: http
       port: 8080
       targetPort: 80
-  selector:
-    io.kompose.service: frontend
