@@ -2,20 +2,20 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: lugx-ingress
+  annotations:
+    kubernetes.io/ingress.class: "gce"  # Use GCP’s default Ingress controller
 spec:
-  ingressClassName: nginx
   rules:
-    - host: lugx.local
-      http:
+    - http:
         paths:
-          # Frontend
+          # Frontend (Root)
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: frontend
+                name: lugx-frontend  # Make sure service is named this way
                 port:
-                  number: 8080   # Must match container port 80
+                  number: 8080       # Service port
 
           # Game Service
           - path: /api/games
