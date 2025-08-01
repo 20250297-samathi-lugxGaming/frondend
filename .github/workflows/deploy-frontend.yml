@@ -52,6 +52,10 @@ jobs:
             --region "$CLUSTER_REGION" \
             --project "$PROJECT_ID"
 
+      - name: 📥 Install gke-gcloud-auth-plugin
+        run: |
+          gcloud components install gke-gcloud-auth-plugin --quiet
+
       - name: 🧪 Debug Cluster Info
         run: kubectl cluster-info
 
