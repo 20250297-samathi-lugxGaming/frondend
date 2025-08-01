@@ -3,8 +3,10 @@ kind: Ingress
 metadata:
   name: lugx-ingress
   annotations:
-    kubernetes.io/ingress.class: "gce"  # ✅ Use GKE’s default Ingress controller
+    kubernetes.io/ingress.class: gce
+    kubernetes.io/ingress.global-static-ip-name: "lugx-ip"
 spec:
+  ingressClassName: gce
   rules:
     - http:
         paths:
@@ -15,8 +17,6 @@ spec:
                 name: lugx-frontend
                 port:
                   number: 8080
-
-          # Game Service
           - path: /api/games
             pathType: Prefix
             backend:
@@ -24,8 +24,6 @@ spec:
                 name: game-service
                 port:
                   number: 8086
-
-          # Order Service
           - path: /api/orders
             pathType: Prefix
             backend:
@@ -33,8 +31,6 @@ spec:
                 name: order-service
                 port:
                   number: 8087
-
-          # Analytics Service
           - path: /api/analytics
             pathType: Prefix
             backend:
