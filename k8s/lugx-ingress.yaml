@@ -2,11 +2,11 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: lugx-ingress
+  namespace: default
   annotations:
-    kubernetes.io/ingress.class: gce
-    kubernetes.io/ingress.global-static-ip-name: "lugx-ip"
+    kubernetes.io/ingress.class: "nginx"
 spec:
-  ingressClassName: gce
+  ingressClassName: nginx
   rules:
     - http:
         paths:
@@ -17,6 +17,7 @@ spec:
                 name: lugx-frontend
                 port:
                   number: 8080
+
           - path: /api/games
             pathType: Prefix
             backend:
@@ -24,6 +25,7 @@ spec:
                 name: game-service
                 port:
                   number: 8086
+
           - path: /api/orders
             pathType: Prefix
             backend:
@@ -31,6 +33,7 @@ spec:
                 name: order-service
                 port:
                   number: 8087
+
           - path: /api/analytics
             pathType: Prefix
             backend:
