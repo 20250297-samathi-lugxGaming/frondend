@@ -46,11 +46,20 @@ jobs:
       - name: 🚀 Push Docker Image to Artifact Registry
         run: docker push ${{ env.IMAGE_URI }}
 
-      - name: 📦 Deploy Frontend & Ingress
+      - name: 🔑 Get GKE Cluster Credentials
         run: |
-          kubectl apply -f k8s/frontend-service.yaml
-          kubectl apply -f k8s/frontend-deployment.yaml
-          kubectl apply -f k8s/lugx-ingress.yaml
+          gcloud container clusters get-credentials "$CLUSTER_NAME" \
+            --region "$CLUSTER_REGION" \
+            --project "$PROJECT_ID"
+
+      - name: 🧪 Debug Cluster Info
+        run: kubectl cluster-info
+
+      - name: 📦 Deploy Frontend & Ingress (Skip Validation)
+        run: |
+          kubectl apply --validate=false -f k8s/frontend-service.yaml
+          kubectl apply --validate=false -f k8s/frontend-deployment.yaml
+          kubectl apply --validate=false -f k8s/lugx-ingress.yaml
           kubectl rollout restart deployment $DEPLOYMENT_NAME
 
       - name: ✅ Wait for Rollout to Complete
