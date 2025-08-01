@@ -22,7 +22,7 @@ spec:
               service:
                 name: game-service
                 port:
-                  number: 8086
+                  number: 8081
 
           - path: /api/orders
             pathType: Prefix
@@ -30,7 +30,7 @@ spec:
               service:
                 name: order-service
                 port:
-                  number: 8087
+                  number: 8082
 
           - path: /api/analytics
             pathType: Prefix
@@ -38,4 +38,4 @@ spec:
               service:
                 name: analytics-service
                 port:
-                  number: 8088
+                  number: 8083
