@@ -48,9 +48,9 @@ jobs:
 
       - name: 📦 Deploy Frontend & Ingress
         run: |
-          kubectl apply -f frontend-service.yaml
-          kubectl apply -f frontend-deployment.yaml
-          kubectl apply -f lugx-ingress.yaml
+          kubectl apply -f k8s/frontend-service.yaml
+          kubectl apply -f k8s/frontend-deployment.yaml
+          kubectl apply -f k8s/lugx-ingress.yaml
           kubectl rollout restart deployment $DEPLOYMENT_NAME
 
       - name: ✅ Wait for Rollout to Complete
