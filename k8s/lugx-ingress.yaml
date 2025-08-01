@@ -3,19 +3,18 @@ kind: Ingress
 metadata:
   name: lugx-ingress
   annotations:
-    kubernetes.io/ingress.class: "gce"  # Use GCP’s default Ingress controller
+    kubernetes.io/ingress.class: "gce"  # ✅ Use GKE’s default Ingress controller
 spec:
   rules:
     - http:
         paths:
-          # Frontend (Root)
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: lugx-frontend  # Make sure service is named this way
+                name: lugx-frontend
                 port:
-                  number: 8080       # Service port
+                  number: 8080
 
           # Game Service
           - path: /api/games
