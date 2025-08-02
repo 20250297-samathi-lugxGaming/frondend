@@ -17,7 +17,6 @@ spec:
                 name: lugx-frontend
                 port:
                   number: 8080
-
           - path: /api/games
             pathType: Prefix
             backend:
@@ -25,7 +24,6 @@ spec:
                 name: game-service
                 port:
                   number: 8086
-
           - path: /api/orders
             pathType: Prefix
             backend:
@@ -33,7 +31,6 @@ spec:
                 name: order-service
                 port:
                   number: 8087
-
           - path: /api/analytics
             pathType: Prefix
             backend:
