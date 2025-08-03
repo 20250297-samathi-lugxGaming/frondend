@@ -212,7 +212,7 @@ https://templatemo.com/tm-589-lugx-gaming
         });
       });
 
-      let scrollTimeout;
+let scrollTimeout;
 window.addEventListener("scroll", function () {
   clearTimeout(scrollTimeout);
   scrollTimeout = setTimeout(() => {
@@ -227,11 +227,12 @@ window.addEventListener("scroll", function () {
         eventType: "scroll",
         pageUrl: window.location.pathname,
         sessionId: getSessionId(),
-        additional_data: JSON.stringify({ scrollDepth: scrollPercent }) // ✅ Fix here
+        scrollDepth: scrollPercent // ✅ Send directly
       }),
     });
   }, 1000);
 });
+
 
 
     </script>
