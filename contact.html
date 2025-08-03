@@ -213,21 +213,26 @@ https://templatemo.com/tm-589-lugx-gaming
       });
 
       let scrollTimeout;
-      window.addEventListener("scroll", function () {
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-          fetch("/api/analytics", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              eventType: "scroll",
-              pageUrl: window.location.pathname,
-              sessionId: getSessionId(),
-             // timestamp: new Date().toISOString(),
-            }),
-          });
-        }, 1000); // only send every 1 second if scrolling
-      });
+  window.addEventListener("scroll", function () {
+  clearTimeout(scrollTimeout);
+  scrollTimeout = setTimeout(() => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = docHeight > 0 ? Math.round((scrollTop / docHeight) * 100) : 0;
+
+    fetch("/api/analytics", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        eventType: "scroll",
+        pageUrl: window.location.pathname,
+        sessionId: getSessionId(),
+        scrollDepth: scrollPercent, // ✅ this is the key line
+        // timestamp: new Date().toISOString()
+      }),
+    });
+  }, 1000);
+});
     </script>
   </body>
 </html>
