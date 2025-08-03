@@ -66,3 +66,16 @@ jobs:
 
       - name: 🔍 Check Service Status
         run: kubectl get svc,pods -o wide
+
+      - name: 🔍 Run Integration Tests on Deployed Services
+        run: |
+          echo "Testing Game Service..."
+          curl --fail http://34.56.204.36/api/games || exit 1
+      
+          echo "Testing Order Service..."
+          curl --fail http://34.56.204.36/api/orders || exit 1
+      
+          echo "Testing Analytics Service..."
+          curl --fail http://34.56.204.36/api/analytics || exit 1
+      
+          echo "✅ All services are live via Ingress!"
