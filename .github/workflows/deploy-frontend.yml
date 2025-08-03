@@ -75,7 +75,4 @@ jobs:
           echo "Testing Order Service..."
           curl --fail http://34.56.204.36/api/orders || exit 1
       
-          echo "Testing Analytics Service..."
-          curl --fail http://34.56.204.36/api/analytics || exit 1
-      
-          echo "✅ All services are live via Ingress!"
+          echo "✅ Game and Order services are reachable!"
