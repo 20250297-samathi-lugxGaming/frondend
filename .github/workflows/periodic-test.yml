@@ -1,0 +1,19 @@
+name: Daily API Health Check
+
+on:
+  schedule:
+    - cron: '0 3 * * *'  # Every day at 3:00 AM UTC
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🔍 Run Daily API Tests
+        run: |
+          echo "Testing Game Service..."
+          curl --fail http://34.56.204.36/api/games || exit 1
+
+          echo "Testing Order Service..."
+          curl --fail http://34.56.204.36/api/orders || exit 1
+
+          echo "✅ Services passed daily health check!"
