@@ -213,7 +213,7 @@ https://templatemo.com/tm-589-lugx-gaming
       });
 
       let scrollTimeout;
-  window.addEventListener("scroll", function () {
+window.addEventListener("scroll", function () {
   clearTimeout(scrollTimeout);
   scrollTimeout = setTimeout(() => {
     const scrollTop = window.scrollY;
@@ -227,12 +227,13 @@ https://templatemo.com/tm-589-lugx-gaming
         eventType: "scroll",
         pageUrl: window.location.pathname,
         sessionId: getSessionId(),
-        additional_data: { scrollDepth: scrollPercent }
-        // timestamp: new Date().toISOString()
+        additional_data: JSON.stringify({ scrollDepth: scrollPercent }) // ✅ Fix here
       }),
     });
   }, 1000);
 });
+
+
     </script>
   </body>
 </html>
