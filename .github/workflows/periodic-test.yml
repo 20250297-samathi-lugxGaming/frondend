@@ -2,7 +2,7 @@ name: Daily API Health Check
 
 on:
   schedule:
-    - cron: '0 3 * * *'  # Every day at 3:00 AM UTC
+    - cron: '0 14 * * *'  
 
 jobs:
   run-tests:
